@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+---
+
+<div class="theme-switcher">
+  <button
+    id="theme-toggle"
+    class="icon-button theme-toggle"
+    aria-label="Theme: System. Change color theme"
+    aria-haspopup="menu"
+    aria-controls="theme-menu"
+    aria-expanded="false"
+    type="button"
+  >
+    <span class="theme-symbol" data-preference-icon="light">
+      <Icon name="sun" size={19} />
+    </span>
+    <span class="theme-symbol" data-preference-icon="dark">
+      <Icon name="moon" size={19} />
+    </span>
+    <span class="theme-symbol" data-preference-icon="system">
+      <Icon name="system" size={19} />
+    </span>
+  </button>
+  <div id="theme-menu" class="theme-menu" role="menu" aria-label="Color theme" hidden>
+    <span class="theme-menu__label">APPEARANCE</span>
+    {[
+      { value: 'light', label: 'Light', icon: 'sun' },
+      { value: 'dark', label: 'Dark', icon: 'moon' },
+      { value: 'system', label: 'System', icon: 'system' },
+    ].map((theme) => (
+      <button
+        type="button"
+        role="menuitemradio"
+        aria-checked={theme.value === 'system' ? 'true' : 'false'}
+        data-theme-value={theme.value}
+        tabindex="-1"
+      >
+        <Icon name={theme.icon} size={17} />
+        <span>{theme.label}</span>
+        <Icon name="check" class="theme-check" size={15} />
+      </button>
+    ))}
+  </div>
+</div>

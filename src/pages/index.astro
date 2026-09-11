@@ -1,0 +1,320 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import GrowthVisual from '../components/GrowthVisual.astro';
+import CaseVisual from '../components/CaseVisual.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import CTA from '../components/CTA.astro';
+import { services } from '../data/services';
+import { callHref } from '../data/site';
+import { publishedCaseStudies } from '../data/case-studies';
+import '../styles/home.css';
+const approach = [
+  {
+    title: 'Strategy',
+    icon: 'compass',
+    description:
+      'Understand your business, your audience, and where the real growth opportunities lie.',
+    note: 'A CLEAR DIRECTION',
+  },
+  {
+    title: 'Creative',
+    icon: 'spark',
+    description:
+      'Build compelling campaigns, websites, and digital experiences that make people pay attention.',
+    note: 'A MEANINGFUL CONNECTION',
+  },
+  {
+    title: 'Conversion',
+    icon: 'cursor',
+    description:
+      'Give that attention a purpose. Turn traffic and interest into enquiries, leads, and customers.',
+    note: 'A PURPOSEFUL NEXT STEP',
+  },
+];
+const differences = [
+  {
+    title: 'Strategy First',
+    icon: 'compass',
+    description:
+      'Every campaign and digital experience starts with understanding your business and the people you want to reach.',
+  },
+  {
+    title: 'Built to Convert',
+    icon: 'focus',
+    description:
+      'Your website, landing pages, and campaigns work toward clear conversion goals—not just a good first impression.',
+  },
+  {
+    title: 'Data-Informed Decisions',
+    icon: 'chart',
+    description:
+      'We use performance data to understand what’s working, what isn’t, and where the next opportunity lives.',
+  },
+  {
+    title: 'One Growth Partner',
+    icon: 'layers',
+    description:
+      'Paid advertising, web development, social media, and SEO. Connected by one strategy, under one partner.',
+  },
+];
+const process = [
+  {
+    title: 'Discover',
+    description: 'Understand your business, goals, audience, and current digital presence.',
+  },
+  {
+    title: 'Strategize',
+    description: 'Build a focused strategy around the channels and opportunities that matter most.',
+  },
+  {
+    title: 'Execute',
+    description: 'Launch campaigns, websites, landing pages, and content with attention to detail.',
+  },
+  {
+    title: 'Optimize',
+    description: 'Review performance, learn from the data, and continuously improve.',
+  },
+];
+---
+
+<SiteLayout
+  title="LeadLexity — Digital Marketing That Converts"
+  description="LeadLexity helps service-based and local businesses grow with performance marketing, conversion-focused websites, social media, and SEO. Where Creativity Meets Conversion."
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-layout">
+      <div class="hero-content">
+        <p class="eyebrow eyebrow--dark">
+          <span class="eyebrow-mark"></span>DIGITAL GROWTH AGENCY
+        </p>
+        <h1 id="hero-title">
+          <span class="hero-line">Where Creativity</span>
+          <span class="hero-line">
+            Meets <span class="hero-highlight">Conversion.</span>
+          </span>
+        </h1>
+        <p class="hero-description">
+          We help service-based businesses grow with performance marketing, high-converting
+          websites, and a strategy that turns attention into action.
+        </p>
+        <div class="button-row hero-actions">
+          <Button href={callHref}>Book a Free Strategy Call</Button>
+          <Button href="/services" variant="text" icon="arrow-right">
+            Explore Our Services
+          </Button>
+        </div>
+        <p class="hero-note">
+          <span class="hero-note__icon">
+            <Icon name="globe" size={15} />
+          </span>
+          Built for service businesses. Ready for the world.
+        </p>
+      </div>
+      <GrowthVisual />
+    </div>
+    <div class="container">
+      <div class="hero-footnote">
+        <span>BIG-PICTURE THINKING. BUSINESS-FOCUSED MARKETING.</span>
+        <div>
+          <span>Strategy</span>
+          <Icon name="plus" size={11} />
+          <span>Creative</span>
+          <Icon name="plus" size={11} />
+          <span>Performance</span>
+          <Icon name="arrow-up-right" size={14} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="positioning section-padding" aria-labelledby="positioning-title">
+    <div class="container">
+      <div class="section-heading" data-reveal>
+        <div class="section-heading__main">
+          <p class="eyebrow">
+            <span class="eyebrow-mark"></span>MORE THAN MARKETING ACTIVITY
+          </p>
+          <h2 id="positioning-title">Built for businesses that want growth—not just visibility.</h2>
+        </div>
+        <div class="section-heading__aside">
+          <p>
+            More posts. More clicks. More noise. None of it matters without direction. We bring
+            strategy, creative, and performance together to move your business forward.
+          </p>
+        </div>
+      </div>
+      <div class="approach-grid">
+        {approach.map((item, index) => (
+          <div class="approach-card" data-reveal>
+            <div class="approach-card__top">
+              <span class="card-index">0{index + 1}</span>
+              <Icon name={item.icon} size={27} />
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <span class="approach-card__note">{item.note}</span>
+            {index < 2 && (
+              <span class="approach-plus" aria-hidden="true">
+                <Icon name="plus" size={16} />
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-services section-padding surface-alt" id="services">
+    <div class="container">
+      <SectionHeading
+        eyebrow="THE RIGHT EXPERTISE. ONE PARTNER."
+        title="Everything you need to grow online."
+        description="From attracting the right audience to converting them into customers, LeadLexity brings the essential pieces of digital growth together."
+      >
+        <Button href="/services" variant="text" icon="arrow-right">
+          Discover our services
+        </Button>
+      </SectionHeading>
+      <div class="services-grid">
+        {services.map((service, index) => (
+          <ServiceCard service={service} index={index} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section section-padding" aria-labelledby="why-title">
+    <div class="container why-grid">
+      <div class="why-intro" data-reveal>
+        <p class="eyebrow">
+          <span class="eyebrow-mark"></span>THE LEADLEXITY DIFFERENCE
+        </p>
+        <h2 id="why-title">
+          Marketing that connects creativity to <span>results.</span>
+        </h2>
+        <p>
+          Advertising doesn’t work in isolation. Neither does your website. We look at the whole
+          customer journey—and make the pieces work together.
+        </p>
+        <div
+          class="why-journey"
+          aria-label="The customer journey, from discovery to interest to action"
+        >
+          <span class="why-journey__label">THE WHOLE JOURNEY. NOT JUST ONE CHANNEL.</span>
+          <div class="why-journey__steps">
+            <span>
+              <i></i>Discovery
+            </span>
+            <span>
+              <i></i>Interest
+            </span>
+            <span>
+              <i></i>Action
+              <Icon name="arrow-up-right" size={14} />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="why-points">
+        {differences.map((point) => (
+          <div class="why-point" data-reveal>
+            <span class="why-point__icon">
+              <Icon name={point.icon} size={21} />
+            </span>
+            <div>
+              <h3>{point.title}</h3>
+              <p>{point.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="process-section section-padding" aria-labelledby="process-title">
+    <div class="container">
+      <div class="process-heading" data-reveal>
+        <div>
+          <p class="eyebrow">
+            <span class="eyebrow-mark"></span>FROM CLARITY TO MOMENTUM
+          </p>
+          <h2 id="process-title">
+            A simple process.
+            <br />
+            <span>Built for growth.</span>
+          </h2>
+        </div>
+        <p>
+          A clear path forward.
+          <br />
+          Room to keep getting better.
+        </p>
+      </div>
+      <ol class="process-grid">
+        {process.map((step, index) => (
+          <li class="process-step" data-reveal>
+            <span class="process-step__number">0{index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="home-cases section-padding" aria-labelledby="case-preview-title">
+    <div class="container">
+      {publishedCaseStudies.length ? (
+        <>
+          <SectionHeading
+            eyebrow="OUR WORK"
+            title="Real work. Real results."
+            description="Explore the thinking, execution, and verified outcomes behind our published projects."
+          >
+            <Button href="/case-studies" variant="text" icon="arrow-right">
+              View all case studies
+            </Button>
+          </SectionHeading>
+          <div class="case-studies-grid">
+            {publishedCaseStudies.slice(0, 2).map((study) => (
+              <CaseStudyCard study={study} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="case-preview-grid">
+          <div data-reveal>
+            <p class="eyebrow">
+              <span class="eyebrow-mark"></span>THE WORK BEHIND THE WORDS
+            </p>
+            <h2 id="case-preview-title">
+              Real work. Real results.
+              <br />
+              <span class="text-muted">Coming soon.</span>
+            </h2>
+            <p class="case-preview-copy">
+              We’re building our case study library. Soon you’ll be able to explore how LeadLexity
+              helps businesses turn digital marketing into measurable growth.
+            </p>
+            <div class="button-row">
+              <Button href="/contact" variant="secondary">
+                Start Your Project
+              </Button>
+              <Button href="/case-studies" variant="text" icon="arrow-right">
+                Our case study library
+              </Button>
+            </div>
+          </div>
+          <div data-reveal>
+            <CaseVisual />
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+  <CTA />
+</SiteLayout>

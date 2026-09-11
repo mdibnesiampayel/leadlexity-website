@@ -1,0 +1,151 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import '../styles/pages.css';
+import '../styles/form.css';
+const methods = [
+  {
+    title: 'Email',
+    icon: 'mail',
+    href: site.email ? `mailto:${site.email}` : '',
+    detail: site.email,
+  },
+  {
+    title: 'Phone',
+    icon: 'phone',
+    href: site.phone ? `tel:${site.phone.replace(/[^+\d]/g, '')}` : '',
+    detail: site.phone,
+  },
+  {
+    title: 'WhatsApp',
+    icon: 'message-circle',
+    href: site.whatsapp,
+    detail: site.whatsapp ? 'Start a conversation' : '',
+  },
+  {
+    title: 'Messenger',
+    icon: 'message-square',
+    href: site.messenger,
+    detail: site.messenger ? 'Send a message' : '',
+  },
+];
+const questions = [
+  {
+    question: 'Do I need to know which service I need?',
+    answer:
+      'Not at all. Choose “Not Sure Yet” and tell us what you want to achieve. The right starting point is your business goal—not a predetermined list of services.',
+  },
+  {
+    question: 'Is LeadLexity only for local businesses?',
+    answer:
+      'Our focus is service-based and local businesses, with a worldwide perspective. Your strategy should reflect your customers and service area, whether they’re around the corner or across the world.',
+  },
+  {
+    question: 'What happens when I complete the form?',
+    answer: site.leadEndpoint
+      ? 'Your enquiry will be sent to our connected lead system. It helps us understand your business and follow up about a strategy call. An enquiry is not a confirmed booking.'
+      : 'For now, the form prepares a project brief that you can download or copy. Your details are not sent anywhere, and a call is not booked. Live booking and direct contact details will appear here when connected.',
+  },
+];
+---
+
+<SiteLayout
+  title="Book a Free Strategy Call | LeadLexity"
+  description="Tell LeadLexity about your business and growth goals. Explore the right mix of paid advertising, websites, social media, and SEO with a free strategy conversation."
+>
+  <section class="contact-section">
+    <div class="container contact-layout">
+      <div class="contact-intro">
+        <p class="eyebrow">
+          <span class="eyebrow-mark"></span>A CONVERSATION ABOUT WHAT’S NEXT
+        </p>
+        <h1>
+          Let’s talk about your <span>growth.</span>
+        </h1>
+        <p>Tell us a little about your business and what you’re looking to achieve.</p>
+        <div class="contact-location">
+          <Icon name="globe" size={15} />
+          <span>For service businesses. Across the world.</span>
+        </div>
+      </div>
+      <div class="contact-form-region">
+        <LeadForm />
+      </div>
+      <div class="contact-context">
+        <h2>A little clarity goes a long way.</h2>
+        <p>Here’s where our conversation can start.</p>
+        <ul>
+          <li>
+            <span>01</span>Your business and your audience
+          </li>
+          <li>
+            <span>02</span>Your goals and current roadblocks
+          </li>
+          <li>
+            <span>03</span>The opportunities worth exploring
+          </li>
+        </ul>
+      </div>
+      <div class="contact-direct">
+        <h2>Prefer a direct conversation?</h2>
+        {!methods.some((method) => method.href) && (
+          <p>
+            Verified contact details are being added. We’ll keep the ways to reach us right here.
+          </p>
+        )}
+        <div class="contact-methods">
+          {methods.map((method) =>
+            method.href ? (
+              <a
+                class="contact-method contact-method--live"
+                href={method.href}
+                target={method.href.startsWith('http') ? '_blank' : undefined}
+                rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                <Icon name={method.icon} size={18} />
+                <div>
+                  <span>{method.title}</span>
+                  <span>{method.detail}</span>
+                </div>
+                <Icon name="arrow-up-right" size={16} />
+              </a>
+            ) : (
+              <div class="contact-method">
+                <Icon name={method.icon} size={18} />
+                <span>{method.title}</span>
+                <span class="contact-method__pending">Details coming soon</span>
+              </div>
+            ),
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact-faq section-padding surface-alt" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+      <div>
+        <p class="eyebrow">
+          <span class="eyebrow-mark"></span>A LITTLE MORE CLARITY
+        </p>
+        <h2 id="faq-title">
+          Good questions.
+          <br />
+          Straight answers.
+        </h2>
+      </div>
+      <div class="faq-list">
+        {questions.map((item) => (
+          <details>
+            <summary>
+              {item.question}
+              <Icon name="plus" size={18} />
+            </summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</SiteLayout>

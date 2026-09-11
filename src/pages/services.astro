@@ -1,0 +1,112 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
+import CTA from '../components/CTA.astro';
+import { services } from '../data/services';
+import { site } from '../data/site';
+import '../styles/pages.css';
+---
+
+<SiteLayout
+  title="Digital Marketing Services | LeadLexity"
+  description="Explore LeadLexity’s Meta Ads, Google Ads, website development, landing pages, social media management, and SEO services for service-based and local businesses."
+>
+  <section class="page-hero services-hero">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="eyebrow-mark"></span>OUR SERVICES
+      </p>
+      <div class="services-hero__grid">
+        <h1>
+          Digital services
+          <br />
+          designed around growth.
+        </h1>
+        <span class="services-hero__note">
+          <Icon name="layers" size={27} />
+          <span>
+            SIX DISCIPLINES.
+            <br />
+            ONE DIRECTION.
+          </span>
+        </span>
+      </div>
+      <p class="page-hero__description">
+        You don’t need every channel. You need the right ones, working together. We connect creative
+        execution with performance marketing to help your business move forward.
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <nav class="service-nav" aria-label="Jump to a service">
+      {services.map((service, index) => (
+        <a href={`#${service.id}`}>
+          <span>0{index + 1}</span>
+          <span>{service.name}</span>
+          <Icon name="arrow-down" size={14} />
+        </a>
+      ))}
+    </nav>
+  </div>
+  <div class="service-details container">
+    {services.map((service, index) => (
+      <section id={service.id} class="service-detail" aria-labelledby={`${service.id}-title`}>
+        <div class="service-detail__grid">
+          <div class="service-detail__intro" data-reveal>
+            <div class="service-detail__top">
+              <span class="service-icon">
+                <Icon name={service.icon} size={27} />
+              </span>
+              <p class="eyebrow">
+                0{index + 1} / {service.category}
+              </p>
+            </div>
+            <h2 id={`${service.id}-title`}>{service.name}</h2>
+            <p class="service-detail__introduction">{service.introduction}</p>
+            <h3 class="detail-label">WHY IT MATTERS</h3>
+            <p class="service-detail__why">{service.why}</p>
+            <Button
+              href={site.bookingUrl || `/contact?service=${service.id}#strategy-call`}
+              label={`Book a Free Strategy Call about ${service.name}`}
+            >
+              Book a Free Strategy Call
+            </Button>
+          </div>
+          <div class="service-detail__scope" data-reveal>
+            <h3 class="detail-label">WHAT LEADLEXITY DOES</h3>
+            <ul class="deliverables">
+              {service.deliverables.map((item) => (
+                <li>
+                  <Icon name="check" size={17} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="best-for">
+              <h3 class="detail-label">A GOOD FIT FOR</h3>
+              <p>{service.suited}</p>
+            </div>
+            <p class="service-detail__focus">
+              <Icon name="arrow-up-right" size={16} />
+              {service.focus}
+            </p>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+  <section class="services-fit container">
+    <div data-reveal>
+      <Icon name="compass" size={25} />
+      <div>
+        <h2>Not sure where to start?</h2>
+        <p>
+          You don’t need to have it all figured out. A strategy conversation can help us identify
+          the right starting point for your business.
+        </p>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</SiteLayout>

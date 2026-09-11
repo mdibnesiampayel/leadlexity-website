@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { navigation, callHref } from '../data/site';
+import { services } from '../data/services';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <Logo footer />
+        <p class="footer-tagline">Where Creativity Meets Conversion</p>
+        <p class="footer-intro">
+          A digital growth partner for service-based businesses, worldwide.
+        </p>
+        <span class="footer-world">
+          <Icon name="globe" size={15} />
+          Worldwide by design.
+        </span>
+      </div>
+      <nav class="footer-column" aria-label="Footer navigation">
+        <h2>EXPLORE</h2>
+        {navigation.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+      <nav class="footer-column" aria-label="Our services">
+        <h2>WHAT WE DO</h2>
+        {services.map((service) => (
+          <a href={`/services#${service.id}`}>{service.name}</a>
+        ))}
+      </nav>
+      <div class="footer-conversation">
+        <h2>
+          GOOD THINGS START
+          <br />
+          WITH A CONVERSATION.
+        </h2>
+        <a
+          href={callHref}
+          class="footer-call"
+          target={callHref.startsWith('http') ? '_blank' : undefined}
+          rel={callHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
+          <span>
+            Book a Free
+            <br />
+            Strategy Call
+          </span>
+          <Icon name="arrow-up-right" size={23} />
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} LeadLexity. All rights reserved.</p>
+      <p>
+        Strategy. Creative. <span>Performance.</span>
+      </p>
+    </div>
+  </div>
+</footer>

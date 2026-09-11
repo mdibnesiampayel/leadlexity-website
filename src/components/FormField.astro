@@ -1,0 +1,56 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'url';
+  placeholder?: string;
+  required?: boolean;
+  autocomplete?: string;
+  maxlength?: number;
+  hint?: string;
+  inputmode?: 'text' | 'email' | 'tel' | 'url';
+}
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  placeholder = '',
+  required = false,
+  autocomplete,
+  maxlength = 200,
+  hint,
+  inputmode,
+} = Astro.props;
+---
+
+<div class="form-field">
+  <label for={id}>
+    {label}
+    {required ? (
+      <span class="required-mark" aria-hidden="true">
+        *
+      </span>
+    ) : (
+      <span class="optional-label">Optional</span>
+    )}
+  </label>
+  <input
+    id={id}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    required={required}
+    autocomplete={autocomplete}
+    maxlength={maxlength}
+    inputmode={inputmode}
+    aria-describedby={`${id}-error${hint ? ` ${id}-hint` : ''}`}
+  />
+  {hint && (
+    <p class="field-hint" id={`${id}-hint`}>
+      {hint}
+    </p>
+  )}
+  <p class="field-error" id={`${id}-error`} hidden></p>
+</div>

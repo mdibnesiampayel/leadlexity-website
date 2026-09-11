@@ -1,0 +1,209 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTA from '../components/CTA.astro';
+import '../styles/pages.css';
+const values = [
+  {
+    title: 'Clarity',
+    icon: 'focus',
+    description:
+      'Clear thinking, clear communication, and a clear reason behind every marketing decision.',
+  },
+  {
+    title: 'Creativity',
+    icon: 'spark',
+    description:
+      'Ideas that are distinctive and relevant. Creative work that earns attention without losing its purpose.',
+  },
+  {
+    title: 'Performance',
+    icon: 'chart',
+    description: 'A focus on meaningful business outcomes, not activity for activity’s sake.',
+  },
+  {
+    title: 'Transparency',
+    icon: 'shield',
+    description:
+      'Honest conversations about the work, the priorities, and what the data actually tells us.',
+  },
+  {
+    title: 'Continuous Improvement',
+    icon: 'refresh',
+    description:
+      'Stay curious. Test thoughtfully. Keep learning from the work and make the next iteration better.',
+  },
+];
+---
+
+<SiteLayout
+  title="About LeadLexity — Where Creativity Meets Conversion"
+  description="Meet the thinking behind LeadLexity. A brand-focused digital growth partner connecting creativity, strategy, and conversion for service-based businesses worldwide."
+>
+  <section class="page-hero about-hero">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="eyebrow-mark"></span>ABOUT LEADLEXITY
+      </p>
+      <div class="about-hero__grid">
+        <h1>We believe great marketing should do more than look good.</h1>
+        <div class="about-hero__aside">
+          <span class="editorial-cross">
+            <Icon name="plus" size={29} stroke={1.3} />
+          </span>
+          <p>
+            Attention is only
+            <br />
+            the beginning.
+          </p>
+          <span>
+            CREATIVE THINKING.
+            <br />
+            BUSINESS MINDSET.
+          </span>
+        </div>
+      </div>
+      <p class="page-hero__description">
+        LeadLexity exists to bring the essential pieces of growth together. Not as disconnected
+        services, but as one purposeful digital experience.
+      </p>
+    </div>
+  </section>
+  <section class="belief-strip" aria-label="Our belief">
+    <div class="container belief-grid">
+      <div>
+        <span>01</span>
+        <p>
+          <strong>Creativity</strong>
+          <br />
+          gets attention.
+        </p>
+      </div>
+      <div>
+        <span>02</span>
+        <p>
+          <strong>Strategy</strong>
+          <br />
+          gives it direction.
+        </p>
+      </div>
+      <div>
+        <span>03</span>
+        <p>
+          <strong>Conversion</strong>
+          <br />
+          turns it into business value.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="section-padding mission-section">
+    <div class="container mission-grid">
+      <div data-reveal>
+        <p class="eyebrow">
+          <span class="eyebrow-mark"></span>OUR MISSION
+        </p>
+        <h2>
+          Stronger foundations.
+          <br />
+          Meaningful growth.
+        </h2>
+        <p>
+          We help service-based businesses build stronger digital foundations and generate
+          meaningful growth.
+        </p>
+        <p>
+          That means creating the right strategy, building digital experiences that inspire action,
+          and making marketing decisions with the bigger picture in mind.
+        </p>
+        <p>
+          Whether your customers are around the corner or across the world, the goal stays the same:
+          help the right people find you, understand your value, and take the next step.
+        </p>
+        <Button href="/services" variant="text" icon="arrow-right">
+          How we make it happen
+        </Button>
+      </div>
+      <div class="mission-card" data-reveal>
+        <span class="mission-card__eyebrow">ONE CONNECTED WAY OF THINKING</span>
+        <div class="mission-card__statement">
+          <span>
+            Clarity in
+            <br />
+            the thinking.
+          </span>
+          <span>
+            Care in
+            <br />
+            the making.
+          </span>
+          <span>
+            Purpose in
+            <br />
+            the outcome.
+          </span>
+        </div>
+        <div class="mission-card__footer">
+          <span>CREATIVITY MEETS CONVERSION.</span>
+          <Icon name="arrow-up-right" size={30} />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="philosophy-section section-padding" aria-labelledby="philosophy-title">
+    <div class="container">
+      <p class="eyebrow">
+        <span class="eyebrow-mark"></span>OUR PHILOSOPHY
+      </p>
+      <h2 id="philosophy-title">Great work needs all three.</h2>
+      <div class="philosophy-list">
+        <p data-reveal>
+          <span class="philosophy-index">01</span>
+          <span>
+            Creativity without strategy <strong>is decoration.</strong>
+          </span>
+        </p>
+        <p data-reveal>
+          <span class="philosophy-index">02</span>
+          <span>
+            Strategy without execution <strong>is theory.</strong>
+          </span>
+        </p>
+        <p data-reveal>
+          <span class="philosophy-index">03</span>
+          <span>
+            Execution without measurement <strong>is guesswork.</strong>
+          </span>
+        </p>
+      </div>
+      <div class="philosophy-bottom">
+        <span>LeadLexity brings all three together.</span>
+        <Icon name="layers" size={25} />
+      </div>
+    </div>
+  </section>
+  <section class="section-padding values-section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="WHAT WE VALUE"
+        title="The principles behind the work."
+        description="Not words for a wall. A way to approach every strategy, every creative decision, and every conversation."
+      />
+      <div class="values-grid">
+        {values.map((value, index) => (
+          <article class="value-card" data-reveal>
+            <div class="value-card__top">
+              <span class="card-index">0{index + 1}</span>
+              <Icon name={value.icon} size={24} />
+            </div>
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</SiteLayout>

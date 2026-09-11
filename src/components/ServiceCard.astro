@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import type { Service } from '../data/services';
+interface Props {
+  service: Service;
+  index: number;
+}
+const { service, index } = Astro.props;
+---
+
+<a class="service-card" href={`/services#${service.id}`} data-reveal>
+  <div class="service-card__top">
+    <span class="service-icon">
+      <Icon name={service.icon} size={25} />
+    </span>
+    <span class="card-index">0{index + 1}</span>
+  </div>
+  <h3>{service.name}</h3>
+  <p>{service.description}</p>
+  <div class="service-card__bottom">
+    <span>
+      Explore service<span class="sr-only">: {service.name}</span>
+    </span>
+    <span class="card-arrow">
+      <Icon name="arrow-right" size={16} />
+    </span>
+  </div>
+</a>

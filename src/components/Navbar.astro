@@ -1,0 +1,56 @@
+---
+import Logo from './Logo.astro';
+import ThemeSwitcher from './ThemeSwitcher.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import { navigation, callHref } from '../data/site';
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header" id="site-header">
+  <div class="container nav-shell">
+    <Logo />
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {navigation.map((link) => (
+        <a href={link.href} aria-current={pathname.startsWith(link.href) ? 'page' : undefined}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <div class="nav-actions">
+      <ThemeSwitcher />
+      <Button href={callHref} size="small" class="nav-cta">
+        Book a Free Strategy Call
+      </Button>
+      <button
+        class="icon-button mobile-toggle"
+        id="mobile-toggle"
+        aria-label="Open navigation menu"
+        aria-controls="mobile-navigation"
+        aria-expanded="false"
+        type="button"
+      >
+        <Icon name="menu" class="menu-open-icon" />
+        <Icon name="x" class="menu-close-icon" />
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile navigation" hidden>
+    <div class="container mobile-navigation__inner">
+      {navigation.map((link, index) => (
+        <a
+          class="mobile-nav-link"
+          href={link.href}
+          aria-current={pathname.startsWith(link.href) ? 'page' : undefined}
+        >
+          <span class="mobile-nav-index">0{index + 1}</span>
+          <span>{link.label}</span>
+          <Icon name="arrow-up-right" size={20} />
+        </a>
+      ))}
+      <Button href={callHref}>Book a Free Strategy Call</Button>
+      <p>Strategy. Creative. Performance.</p>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+</header>

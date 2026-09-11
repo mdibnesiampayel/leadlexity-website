@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+---
+
+<div class="case-visual" aria-hidden="true">
+  <div class="case-orbit"></div>
+  <div class="case-paper case-paper--back"></div>
+  <div class="case-paper case-paper--middle"></div>
+  <div class="case-paper case-paper--front">
+    <div class="case-paper__top">
+      <Icon name="file" size={23} />
+      <span>IN THE MAKING</span>
+    </div>
+    <p>
+      Work worth
+      <br />
+      sharing.
+    </p>
+    <div class="case-paper__lines">
+      <span></span>
+      <span></span>
+    </div>
+    <div class="case-paper__footer">
+      <span>THE CASE STUDY LIBRARY</span>
+      <Icon name="arrow-up-right" size={22} />
+    </div>
+  </div>
+  <span class="case-visual__cross">
+    <Icon name="plus" size={20} />
+  </span>
+</div>

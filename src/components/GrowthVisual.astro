@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+---
+
+<div
+  class="growth-visual"
+  role="img"
+  aria-label="Our connected growth approach: attract the right people with paid media and SEO; connect through websites and content; convert interest into action with focused customer experiences."
+>
+  <div class="diagram-topline" aria-hidden="true">
+    <span>
+      <span class="status-dot"></span>THE GROWTH CONNECTION
+    </span>
+    <Icon name="plus" size={15} />
+  </div>
+  <svg class="diagram-connectors" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+    <defs>
+      <pattern id="diagram-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r=".8" fill="currentColor" opacity=".3" />
+      </pattern>
+    </defs>
+    <rect width="500" height="500" fill="url(#diagram-dots)" />
+    <circle
+      class="diagram-orbit"
+      cx="262"
+      cy="253"
+      r="161"
+      stroke="currentColor"
+      stroke-width="1"
+    />
+    <path
+      class="diagram-line"
+      d="M355 125H447V254H405"
+      stroke="currentColor"
+      stroke-width="1.4"
+      stroke-dasharray="4 5"
+    />
+    <path
+      class="diagram-line"
+      d="M176 260H47V392H107"
+      stroke="currentColor"
+      stroke-width="1.4"
+      stroke-dasharray="4 5"
+    />
+    <circle
+      cx="447"
+      cy="190"
+      r="4"
+      fill="var(--accent)"
+      stroke="var(--diagram-bg)"
+      stroke-width="3"
+    />
+    <circle
+      cx="47"
+      cy="328"
+      r="4"
+      fill="var(--accent)"
+      stroke="var(--diagram-bg)"
+      stroke-width="3"
+    />
+    <path d="m100 387 5 5-5 5" stroke="var(--accent-ink)" stroke-width="1.6" />
+    <path d="m412 249-5 5 5 5" stroke="var(--accent-ink)" stroke-width="1.6" />
+  </svg>
+  <div class="journey-card journey-card--attract" aria-hidden="true">
+    <div class="journey-card__label">
+      <span>01 / ATTRACT</span>
+      <Icon name="target" size={17} />
+    </div>
+    <span class="journey-card__title">Find your people.</span>
+    <span class="journey-card__services">
+      PAID MEDIA <span>+</span> SEO
+    </span>
+  </div>
+  <div class="journey-card journey-card--connect" aria-hidden="true">
+    <div class="journey-card__label">
+      <span>02 / CONNECT</span>
+      <Icon name="cursor" size={17} />
+    </div>
+    <span class="journey-card__title">Make every click count.</span>
+    <span class="journey-card__services">
+      WEBSITES <span>+</span> CONTENT
+    </span>
+  </div>
+  <div class="journey-card journey-card--convert" aria-hidden="true">
+    <div class="journey-card__label">
+      <span>03 / CONVERT</span>
+      <Icon name="arrow-up-right" size={19} />
+    </div>
+    <span class="journey-card__title">Turn interest into action.</span>
+    <span class="journey-card__services">
+      LANDING PAGES <span>+</span> OPTIMIZATION
+    </span>
+  </div>
+  <div class="diagram-bottomline" aria-hidden="true">
+    <span>Different disciplines. One direction.</span>
+    <span class="diagram-corner"></span>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+---
+interface Props {
+  footer?: boolean;
+}
+const { footer = false } = Astro.props;
+---
+
+<a class:list={['brand', { 'brand--footer': footer }]} href="/" aria-label="LeadLexity home">
+  <img
+    class="brand__light"
+    src="/brand/leadlexity-black.png"
+    alt="LeadLexity"
+    width="1100"
+    height="218"
+    loading={footer ? 'lazy' : 'eager'}
+    decoding="async"
+  />
+  <img
+    class="brand__dark"
+    src="/brand/leadlexity-white.png"
+    alt="LeadLexity"
+    width="1100"
+    height="218"
+    loading={footer ? 'lazy' : 'eager'}
+    decoding="async"
+  />
+</a>

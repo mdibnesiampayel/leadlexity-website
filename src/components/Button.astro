@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'text' | 'inverse';
+  size?: 'normal' | 'small';
+  icon?: string | false;
+  class?: string;
+  id?: string;
+  type?: 'button' | 'submit';
+  label?: string;
+}
+const {
+  href,
+  variant = 'primary',
+  size = 'normal',
+  icon = 'arrow-up-right',
+  class: className = '',
+  id,
+  type = 'button',
+  label,
+} = Astro.props;
+const Tag = href ? 'a' : 'button';
+const external = href?.startsWith('http');
+---
+
+<Tag
+  href={href}
+  type={!href ? type : undefined}
+  class:list={['button', `button--${variant}`, `button--${size}`, className]}
+  id={id}
+  aria-label={label}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  <span>
+    <slot />
+  </span>
+  {icon && <Icon name={icon} size={18} class="button__arrow" />}
+</Tag>

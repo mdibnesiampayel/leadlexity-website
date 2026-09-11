@@ -1,0 +1,101 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Button from '../../components/Button.astro';
+import CTA from '../../components/CTA.astro';
+import { publishedCaseStudies } from '../../data/case-studies';
+import type { CaseStudy } from '../../data/case-studies';
+import '../../styles/pages.css';
+export function getStaticPaths() {
+  return publishedCaseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+interface Props {
+  study: CaseStudy;
+}
+const { study } = Astro.props;
+---
+
+<SiteLayout title={`${study.title} | LeadLexity Case Studies`} description={study.summary}>
+  <article class="case-article container">
+    <Button href="/case-studies" variant="text" icon={false}>
+      ← Back to case studies
+    </Button>
+    <header class="case-article__header">
+      <p class="eyebrow">
+        {study.industry} / {study.client}
+      </p>
+      <h1>{study.title}</h1>
+      <p>{study.summary}</p>
+      <ul class="project-tags" aria-label="Services provided">
+        {study.services.map((service) => (
+          <li>{service}</li>
+        ))}
+      </ul>
+    </header>
+    <div class="case-article__content">
+      {[
+        { title: 'The challenge', content: study.challenge },
+        { title: 'The strategy', content: study.strategy },
+        { title: 'The execution', content: study.execution },
+        { title: 'The results', content: study.results },
+      ].map((section) => (
+        <section data-reveal>
+          <h2>{section.title}</h2>
+          <p>{section.content}</p>
+        </section>
+      ))}
+      {!!study.metrics?.length && (
+        <section>
+          <h2>Before & after</h2>
+          <div class="metric-list">
+            {study.metrics.map((metric) => (
+              <div class="verified-metric">
+                <h3>{metric.label}</h3>
+                <dl>
+                  <div>
+                    <dt>Before</dt>
+                    <dd>{metric.before}</dd>
+                  </div>
+                  <div>
+                    <dt>After</dt>
+                    <dd>{metric.after}</dd>
+                  </div>
+                </dl>
+                <p>Period: {metric.period}</p>
+                <p>Source: {metric.source}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {!!study.screenshots?.length && (
+        <section>
+          <h2>A closer look</h2>
+          <div class="project-screenshots">
+            {study.screenshots.map((image) => (
+              <figure>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>{image.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+      <section>
+        <h2>Key takeaways</h2>
+        <ul class="takeaways">
+          {study.takeaways.map((takeaway) => (
+            <li>{takeaway}</li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </article>
+  <CTA />
+</SiteLayout>

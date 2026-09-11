@@ -1,0 +1,30 @@
+---
+import type { CaseStudy } from '../data/case-studies';
+import Icon from './Icon.astro';
+interface Props {
+  study: CaseStudy;
+}
+const { study } = Astro.props;
+---
+
+<a href={`/case-studies/${study.slug}`} class="case-study-card" data-reveal>
+  {study.screenshots?.[0] && (
+    <img
+      src={study.screenshots[0].src}
+      alt={study.screenshots[0].alt}
+      width={study.screenshots[0].width}
+      height={study.screenshots[0].height}
+      loading="lazy"
+      decoding="async"
+    />
+  )}
+  <div class="case-study-card__body">
+    <span class="eyebrow">{study.industry}</span>
+    <h3>{study.title}</h3>
+    <p>{study.summary}</p>
+    <div class="service-card__bottom">
+      <span>{study.client}</span>
+      <Icon name="arrow-up-right" />
+    </div>
+  </div>
+</a>

@@ -1,0 +1,132 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import CaseVisual from '../../components/CaseVisual.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CTA from '../../components/CTA.astro';
+import { publishedCaseStudies } from '../../data/case-studies';
+import '../../styles/pages.css';
+const chapters = [
+  {
+    icon: 'compass',
+    label: 'THE STARTING POINT',
+    title: 'The business behind the brief.',
+    copy: 'The client, their industry, their starting point, and the challenge that shaped the project.',
+  },
+  {
+    icon: 'layers',
+    label: 'THE THINKING & EXECUTION',
+    title: 'A look inside the process.',
+    copy: 'The strategy, the creative decisions, and how the campaigns and digital experiences came together.',
+  },
+  {
+    icon: 'chart',
+    label: 'THE OUTCOMES',
+    title: 'The evidence. In context.',
+    copy: 'Verified results, before-and-after metrics where available, campaign and website screenshots, and key takeaways.',
+  },
+];
+---
+
+<SiteLayout
+  title="Case Studies | LeadLexity"
+  description="The LeadLexity case study library is coming soon. Explore our approach to sharing real challenges, thoughtful strategies, and verified digital marketing outcomes."
+>
+  {publishedCaseStudies.length ? (
+    <>
+      <section class="page-hero">
+        <div class="container">
+          <p class="eyebrow">
+            <span class="eyebrow-mark"></span>THE CASE STUDY LIBRARY
+          </p>
+          <h1>
+            Real work.
+            <br />
+            Real results.
+          </h1>
+          <p class="page-hero__description">
+            The challenges, the thinking, and the outcomes behind our published work.
+          </p>
+        </div>
+      </section>
+      <section class="container published-studies">
+        <div class="case-studies-grid">
+          {publishedCaseStudies.map((study) => (
+            <CaseStudyCard study={study} />
+          ))}
+        </div>
+      </section>
+    </>
+  ) : (
+    <>
+      <section class="page-hero case-library-hero">
+        <div class="container case-library-grid">
+          <div>
+            <p class="eyebrow">
+              <span class="eyebrow-mark"></span>THE CASE STUDY LIBRARY
+            </p>
+            <h1>
+              Real work.
+              <br />
+              Real results.
+              <br />
+              <span class="muted-heading">Coming soon.</span>
+            </h1>
+            <p class="page-hero__description">
+              We’re building our case study library. Soon you’ll be able to explore how LeadLexity
+              helps businesses turn digital marketing into measurable growth.
+            </p>
+            <div class="button-row">
+              <Button href="/contact">Start Your Project</Button>
+              <Button href="/services" variant="text" icon="arrow-right">
+                Explore our services
+              </Button>
+            </div>
+          </div>
+          <CaseVisual />
+        </div>
+      </section>
+      <section class="case-context section-padding surface-alt">
+        <div class="container">
+          <SectionHeading
+            eyebrow="THE FULL PICTURE"
+            title="Good work deserves context."
+            description="When our first case studies are published, you’ll see more than a finished page or an isolated number. You’ll see the story behind the work."
+          />
+          <div class="case-chapters">
+            {chapters.map((chapter, index) => (
+              <article data-reveal>
+                <div class="case-chapter__top">
+                  <Icon name={chapter.icon} size={26} />
+                  <span class="card-index">0{index + 1}</span>
+                </div>
+                <p class="detail-label">{chapter.label}</p>
+                <h3>{chapter.title}</h3>
+                <p class="case-chapter__copy">{chapter.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section class="proof-note section-padding">
+        <div class="container">
+          <div class="proof-note__inner" data-reveal>
+            <span class="proof-note__icon">
+              <Icon name="shield" size={26} />
+            </span>
+            <div>
+              <h2>Proof, not placeholder promises.</h2>
+              <p>
+                No invented numbers. No borrowed credibility. Every case study added here will be
+                based on real work and approved for sharing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+  <CTA />
+</SiteLayout>

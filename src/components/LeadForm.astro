@@ -1,0 +1,300 @@
+---
+import FormField from './FormField.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+import { site } from '../data/site';
+const budgets = [
+  'Prefer to discuss',
+  'Exploring my options',
+  'Under $1,000 / month',
+  '$1,000–$3,000 / month',
+  '$3,000–$5,000 / month',
+  '$5,000–$10,000 / month',
+  '$10,000+ / month',
+];
+---
+
+<section id="strategy-call" class="lead-form-panel" aria-labelledby="form-title" tabindex="-1">
+  <div class="lead-form-header">
+    <p class="eyebrow">
+      <span class="eyebrow-mark"></span>YOUR NEXT STEP
+    </p>
+    <h2 id="form-title">Let’s start with your business.</h2>
+    <p>A little context helps us see the bigger picture.</p>
+  </div>
+  <div
+    class:list={['booking-note', { 'booking-note--live': !!site.leadEndpoint }]}
+    id="form-mode-note"
+  >
+    <Icon name={site.leadEndpoint ? 'shield' : 'info'} size={17} />
+    <div>
+      {site.leadEndpoint ? (
+        <>
+          <strong>A purposeful first conversation.</strong>
+          <p>
+            Share your details so we can follow up about your goals. Sending an enquiry does not
+            automatically book a call.
+          </p>
+        </>
+      ) : (
+        <>
+          <strong>
+            {site.bookingUrl
+              ? 'Prepare for your strategy call.'
+              : 'Live booking is being connected.'}
+          </strong>
+          <p>
+            You can prepare and download a project brief below. Nothing is sent or booked.
+            {site.bookingUrl && (
+              <>
+                {' '}
+                Ready to choose a time?{' '}
+                <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
+                  Open the booking calendar.
+                </a>
+              </>
+            )}
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+  <noscript>
+    <div class="form-noscript">
+      Please enable JavaScript to validate and prepare your project brief. This form does not send
+      information without its validation tools.
+    </div>
+  </noscript>
+  <form
+    id="lead-form"
+    method="post"
+    action="/contact"
+    data-endpoint={site.leadEndpoint}
+    data-booking={site.bookingUrl}
+    aria-label="Project enquiry"
+    aria-describedby="form-mode-note"
+    novalidate
+  >
+    <fieldset id="project-fields" disabled>
+      <legend class="sr-only">Tell us about your business</legend>
+      <p class="required-note">
+        Fields marked <span aria-hidden="true">*</span> are required.
+      </p>
+      <div class="form-error-summary" id="form-errors" role="alert" tabindex="-1" hidden>
+        <h3>Please check your details.</h3>
+        <ul id="form-error-list"></ul>
+      </div>
+      <div class="form-grid">
+        <FormField
+          id="full-name"
+          name="fullName"
+          label="Full Name"
+          placeholder="Your full name"
+          autocomplete="name"
+          required
+          maxlength={100}
+        />
+        <FormField
+          id="business-name"
+          name="businessName"
+          label="Business Name"
+          placeholder="Your business name"
+          autocomplete="organization"
+          required
+          maxlength={150}
+        />
+        <FormField
+          id="email"
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="Your business email"
+          autocomplete="email"
+          inputmode="email"
+          required
+          maxlength={254}
+        />
+        <FormField
+          id="phone"
+          name="phone"
+          label="Phone / WhatsApp"
+          type="tel"
+          placeholder="Include your country code"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength={30}
+        />
+        <FormField
+          id="website"
+          name="website"
+          label="Website"
+          placeholder="Your website address"
+          autocomplete="url"
+          inputmode="url"
+          maxlength={500}
+        />
+        <div class="form-field">
+          <label for="business-type">
+            Business Type<span class="optional-label">Optional</span>
+          </label>
+          <div class="select-wrap">
+            <select id="business-type" name="businessType">
+              <option value="">Select your business type</option>
+              <option>Local service business</option>
+              <option>Professional services</option>
+              <option>Healthcare & wellness</option>
+              <option>Home & property services</option>
+              <option>Other service business</option>
+              <option>Not sure yet</option>
+            </select>
+            <Icon name="chevron-down" size={15} />
+          </div>
+        </div>
+        <fieldset
+          class="services-fieldset form-field--full"
+          id="services-fieldset"
+          aria-describedby="services-hint services-error"
+        >
+          <legend>
+            Services Interested In
+            <span class="required-mark" aria-hidden="true">
+              *
+            </span>
+          </legend>
+          <p class="field-hint" id="services-hint">
+            Select all that apply. It’s okay if you’re not sure yet.
+          </p>
+          <div class="service-options">
+            {services.map((service) => (
+              <label class="service-option">
+                <input
+                  type="checkbox"
+                  name="services"
+                  value={service.interest}
+                  data-service-id={service.id}
+                  id={`interest-${service.id}`}
+                />
+                <span>{service.interest}</span>
+              </label>
+            ))}
+            <label class="service-option">
+              <input
+                type="checkbox"
+                name="services"
+                value="Not Sure Yet"
+                data-service-id="not-sure"
+                id="interest-not-sure"
+              />
+              <span>Not Sure Yet</span>
+            </label>
+          </div>
+          <p class="field-error" id="services-error" hidden></p>
+        </fieldset>
+        <div class="form-field form-field--full">
+          <label for="budget">
+            Monthly Marketing Budget<span class="optional-label">Optional</span>
+          </label>
+          <div class="select-wrap">
+            <select id="budget" name="budget" aria-describedby="budget-hint">
+              <option value="">Select a range (optional)</option>
+              {budgets.map((budget) => (
+                <option>{budget}</option>
+              ))}
+            </select>
+            <Icon name="chevron-down" size={15} />
+          </div>
+          <p class="field-hint" id="budget-hint">
+            A rough range in USD is enough. Or we can discuss it on the call.
+          </p>
+        </div>
+        <div class="form-field form-field--full">
+          <label for="goals">
+            Tell us about your goals
+            <span class="required-mark" aria-hidden="true">
+              *
+            </span>
+          </label>
+          <textarea
+            id="goals"
+            name="goals"
+            rows="4"
+            minlength="15"
+            maxlength="2500"
+            required
+            placeholder="What would you like to achieve? What’s working, and what could be better?"
+            aria-describedby="goals-hint goals-error"
+          ></textarea>
+          <div class="goals-hint-row">
+            <p class="field-hint" id="goals-hint">
+              A few sentences are a great start.
+            </p>
+            <span id="goals-count" aria-hidden="true">
+              0 / 2500
+            </span>
+          </div>
+          <p class="field-error" id="goals-error" hidden></p>
+        </div>
+      </div>
+      <div class="form-trap" aria-hidden="true">
+        <label for="website-check">Leave this field empty</label>
+        <input
+          type="text"
+          id="website-check"
+          name="websiteCheck"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+      <p class="form-request-error" id="request-error" role="alert" hidden></p>
+      <Button type="submit" id="submit-brief" class="form-submit">
+        Book a Free Strategy Call
+      </Button>
+      <p class="form-privacy">
+        <Icon name="shield" size={13} />
+        {site.leadEndpoint
+          ? 'Share business contact details only. Please do not include sensitive information or passwords.'
+          : 'Brief-only mode. Your details stay in this browser unless you copy or download them.'}
+      </p>
+    </fieldset>
+  </form>
+  <div
+    class="brief-result"
+    id="brief-result"
+    tabindex="-1"
+    aria-labelledby="brief-result-title"
+    hidden
+  >
+    <span class="brief-result__icon">
+      <Icon name="file" size={29} />
+    </span>
+    <p class="eyebrow">A CLEARER STARTING POINT</p>
+    <h3 id="brief-result-title">Your brief is ready.</h3>
+    <p id="brief-result-message">
+      Your brief has not been sent, and no call has been booked. Download it to keep your business
+      goals in one place while live booking is being connected.
+    </p>
+    <dl class="brief-summary" id="brief-summary"></dl>
+    {site.bookingUrl && (
+      <Button href={site.bookingUrl} class="brief-booking-link">
+        Choose a time in the calendar
+      </Button>
+    )}
+    <div class="brief-result__actions">
+      <Button id="download-brief" type="button" icon="download">
+        Download brief
+      </Button>
+      <Button id="copy-brief" type="button" variant="secondary" icon="copy">
+        Copy brief
+      </Button>
+    </div>
+    <p class="brief-action-status" id="brief-action-status" role="status" aria-live="polite"></p>
+    <button class="edit-brief" id="edit-brief" type="button">
+      Edit your details
+      <Icon name="arrow-right" size={15} />
+    </button>
+  </div>
+</section>
+<script>
+  import '../scripts/form';
+</script>
